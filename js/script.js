@@ -52,10 +52,10 @@ This function will create and insert/append the elements needed for the paginati
 */
 
 function addPagination(list) {
-   const numberOfPages = list.length / itemsPerPage;
+   const numberOfPages = Math.ceil(list.length / itemsPerPage);
    const ul = document.querySelector('.link-list');
    ul.innerHTML = "";
-   for (let i = 0; i < numberOfPages; i++) {
+   for (let i = 1; i <= numberOfPages; i++) {
       const button = document.createElement('button');
       const li = document.createElement('li')
       button.type = 'button'
@@ -65,11 +65,11 @@ function addPagination(list) {
       ul.appendChild(li);
    }
    ul.firstChild.firstChild.className = 'active';
-
+   
    ul.addEventListener('click', () => {
       const button = event.target;
       const listItems = ul.children;
-      if (button) {
+      if (button.tagName === 'BUTTON') {
          for (let i = 0; i < listItems.length; i++) {
             let li = listItems[i].firstChild;
             if (li.className === 'active') {
@@ -86,11 +86,8 @@ function addPagination(list) {
 
 
 
-
-
-
-
-
 // Call functions
 showPage(data, 2);
 addPagination(data);
+
+
